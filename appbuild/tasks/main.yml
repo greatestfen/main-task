@@ -1,0 +1,27 @@
+---
+# tasks file for appbuild
+- name: Copy all files
+  copy:
+    src: ./
+    dest: /home/app/
+
+- name: Start docker service
+  service:
+    name: docker
+    state: started
+  
+- name: Build an image and push
+  docker_image:
+    name: ansible-docker:latest
+    build:
+      path: /home/app
+    source: build
+
+- name: Create app container
+  docker_container:
+    name: app
+    image: ansible-docker:latest
+    state: started
+    recreate: yes
+    published_ports:
+      - 8081:8080

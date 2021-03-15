@@ -1,0 +1,16 @@
+---
+# tasks file for common
+- name: Install packages
+  apt: 
+    name: ['docker.io', 'git', 'python3-pip']
+    state: present
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Create a build directory
+  file:
+    path: /home/app
+    state: directory
+    mode: '0755' 

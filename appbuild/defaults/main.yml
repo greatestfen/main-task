@@ -1,0 +1,3 @@
+---
+# defaults file for appbuild
+dest_folder: /home/app
