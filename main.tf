@@ -14,7 +14,7 @@ resource "aws_instance" "build" {
   instance_type = "t2.micro"
   key_name      = "t2micro"
   security_groups = [
-       "sg-0e3ed7259ec3533d1",
+       "allow-all-ipv6",
     ]
   tags = { 
     Name = "Build"
@@ -27,7 +27,7 @@ resource "aws_instance" "staging" {
   instance_type = "t2.micro"
   key_name      = "t2micro"
   security_groups = [
-       "sg-0e3ed7259ec3533d1",
+       "allow-all-ipv6",
     ]
   tags = {
     Name = "Staging"
