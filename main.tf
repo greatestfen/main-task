@@ -8,15 +8,28 @@ provider "aws" {
   profile = "default"
 }
 
-resource "aws_instance" "ubuntu" {
-  count         = "2"
+resource "aws_instance" "build" {
+  count         = "1"
   ami           = "ami-0767046d1677be5a0"
   instance_type = "t2.micro"
   key_name      = "t2micro"
-  vpc_security_group_ids = [
-       "sg-d67899a8",
+  security_groups = [
+       "sg-0e3ed7259ec3533d1",
     ]
-  tags          = {
-    Name        = "${element(var.instance_tags, count.index)}"
+  tags = { 
+    Name = "Build"
+  }
+}
+
+resource "aws_instance" "staging" {
+  count         = "1"
+  ami           = "ami-0767046d1677be5a0"
+  instance_type = "t2.micro"
+  key_name      = "t2micro"
+  security_groups = [
+       "sg-0e3ed7259ec3533d1",
+    ]
+  tags = {
+    Name = "Staging"
   }
 }
