@@ -2,7 +2,7 @@
 # tasks file for common
 - name: Install packages
   apt: 
-    name: ['docker.io', 'git', 'python3-pip']
+    name: ['docker-ce', 'git', 'python3-pip']
     state: present
 
 - name: Install Docker Module for Python
