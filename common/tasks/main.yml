@@ -1,23 +1,4 @@
 ---
-- name: Update apt cache
-  apt: update_cache=yes cache_valid_time=3600
-
-- name: Upgrade all apt packages
-  apt: upgrade=dist
-
-- name: Install dependencies
-  apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: yes
-  vars:
-    packages:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - software-properties-common
-    - gnupg-agent
-
 - name: Add an apt signing key for Docker
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
@@ -30,7 +11,7 @@
 
 - name: Install packages
   apt: 
-    name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'git', 'python3-pip']
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'git']
     state: present
     update_cache: yes
     
