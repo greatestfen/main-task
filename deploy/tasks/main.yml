@@ -1,31 +1,19 @@
 ---
-- name: Update apt cache
-  apt: update_cache=yes cache_valid_time=3600
-
-- name: Upgrade all apt packages
-  apt: upgrade=dist
-
-- name: Install dependencies
+- name: Install packages for dependencies
   apt:
-    name: "{{ packages }}"
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
     state: present
     update_cache: yes
-  vars:
-    packages:
-    - apt-transport-https
-    - ca-certificates
-    - curl
-    - software-properties-common
-    - gnupg-agent
-
-- name: Add an apt signing key for Docker
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
 
 - name: Add apt repository for stable version
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    state: present
+    update_cache: yes
+    
+- name: Add an apt signing key for Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
 - name: Install packages
