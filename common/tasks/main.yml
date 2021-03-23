@@ -1,4 +1,9 @@
 ---
+- name: Update repositories cache and install packages
+  apt:
+    name: apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    update_cache: yes
+
 - name: Add an apt signing key for Docker
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
