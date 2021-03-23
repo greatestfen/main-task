@@ -1,18 +1,15 @@
 ---
-- name: Enforce appropriate /tmp folder permissions
-  file:
-    path: /tmp
-    owner: root
-    group: root
-    mode: 0777
-  become: true
-  changed_when: false
+- name: Install packages for dependencies
+  apt:
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+    state: present
+    update_cache: yes
 
 - name: Add apt repository for stable version
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     state: present
-    update_cache: no
+    update_cache: yes
     
 - name: Add an apt signing key for Docker
   apt_key:
@@ -23,7 +20,7 @@
   apt: 
     name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'git', 'python3-pip']
     state: present
-    update_cache: no
+    update_cache: yes
     
 - name: Add user to docker group
   user:
