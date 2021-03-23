@@ -18,7 +18,6 @@
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
-    update_cache: no
 
 - name: Install packages
   apt: 
