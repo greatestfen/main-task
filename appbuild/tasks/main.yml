@@ -16,12 +16,3 @@
     build:
       path: /home/app
     source: build
-
-- name: Create app container
-  docker_container:
-    name: app
-    image: ansible-docker:latest
-    state: started
-    recreate: yes
-    published_ports:
-      - 8081:8080
