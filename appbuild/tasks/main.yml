@@ -12,7 +12,7 @@
   
 - name: Build an image and push
   docker_image:
-    name: ansible-docker:latest
+    name: greatestfen/ansible-docker:latest
     build:
       path: /home/app
     source: build
