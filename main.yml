@@ -1,6 +1,6 @@
 ---
 - name: Setting up build server
-  hosts: deploy
+  hosts: instances
   become: yes
 
   roles:
