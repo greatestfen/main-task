@@ -8,6 +8,15 @@
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+    
+- name: Enforce appropriate /tmp folder permissions
+  file:
+    path: /tmp
+    owner: root
+    group: root
+    mode: 0777
+  become: true
+  changed_when: false
 
 - name: Install packages
   apt: 
