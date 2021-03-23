@@ -1,0 +1,7 @@
+---
+- name: Setting up build server
+  hosts: deploy
+  become: yes
+
+  roles:
+    - deploy
