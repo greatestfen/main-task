@@ -1,14 +1,4 @@
 ---
-- name: Add apt repository for stable version
-  apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-    state: present
-    
-- name: Add an apt signing key for Docker
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-    
 - name: Enforce appropriate /tmp folder permissions
   file:
     path: /tmp
@@ -17,6 +7,16 @@
     mode: 0777
   become: true
   changed_when: false
+
+- name: Add apt repository for stable version
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    state: present
+    
+- name: Add an apt signing key for Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
 - name: Install packages
   apt: 
