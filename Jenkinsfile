@@ -44,8 +44,10 @@ EOF"""
             }
         }
     }
-    stage ('Pull and Run Image on the Staging server') {                
-        git branch: 'deploy', credentialsId: 'gitcreds', url: 'https://github.com/greatestfen/main-task'
-            sh('ansible-playbook main.yml -i hosts -u ubuntu --private-key ${AWS_KEY}')
+    stage ('Pull and Run Image on the Staging server') {
+        withCredentials([sshUserPrivateKey(credentialsId: 't2micro', keyFileVariable: 'AWS_KEY', passphraseVariable: '', usernameVariable: 'SSH_USER')]) {
+            git branch: 'deploy', credentialsId: 'gitcreds', url: 'https://github.com/greatestfen/main-task'
+                sh('ansible-playbook main.yml -i hosts -u ubuntu --private-key ${AWS_KEY}')
+        }
     }
 }
