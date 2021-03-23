@@ -11,7 +11,7 @@
 
 - name: Install packages
   apt: 
-    name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'git']
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'git', 'python3-pip']
     state: present
     update_cache: yes
     
